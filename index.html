@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tagged Templates</title>
+    <style>
+        body{
+            display: flex;
+            margin: 0;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui;
+            background-color: aqua;
+        }
+        strong{
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 1px 1px 10px rgba(0,0,0,.5);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+<!--     <p>El trabajo duro supera al telento natural</p> -->
+
+    <script> 
+    function taggedTemplate (strings,...dynamicValues){
+         /* console.log(strings, dynamicValues)
+         console.log('De aqui hacia abajo itero los datos') */
+         let newContent = ''
+         strings.forEach((string,index) => {
+             /* Esto es lo mismo que el ternario -- const strong = dynamicValues[index] ? `<strong>${dynamicValues[index]}</strong>`: ''*/
+            /*  let strong = ''
+             if(dynamicValues[index]){
+                 strong = `<strong>${dynamicValues[index]}</strong>`
+             } */
+
+            const strong = dynamicValues[index] ? `<strong>${dynamicValues[index]}</strong>`: ''
+            /* console.log(dynamicValues[index]) */
+            /* console.log(string) */
+            /* newContent = newContent + string + strong */
+            newContent += `${string} ${strong}`
+        })
+        return `<p>${newContent}</p>`
+        /* console.log(newContent) */
+    }
+        const message = taggedTemplate`El ${'trabajo duro'} supera al ${'telento natural'}`
+        document.body.innerHTML = message
+    </script>
+</body>
+<!-- 
+***Parametros para los tagged template
+1.Strings (textos que existan dentro del template literal)
+<p> los strings van a ser un array, ¿si solo llega un string? porque entonces es un array,
+    facil porque se puede poner valores dinamicos</p>
+2. RestOperatior
+    ...DynamicValues
+<p>Los dinamycValues se puede utilizar para destacar etiquetas especiales
+    y hacer expresiones dinamicas</p>
+
+3.Iterar un array: se puede hacer un con forEach, el forEachs recibe una funcion como parametro, 
+    El segundo parametro que recibe es el indice del array '0.1.2 etc'
+
+ -->
+</html>
